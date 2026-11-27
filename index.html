@@ -367,7 +367,7 @@ menu.innerHTML=`<div class="mcols">
 const V={};
 V.home=()=>`
 <section class="hero"><img src="img/hero_wall.jpg" alt="קיר המורשת באולם הגלגיליות בבית דני: מעפרה חזה ועד האחים ראובני" data-zoom>
- <div class="pick"><h2>בחר פרק</h2>${CH.map(c=>L('/ch/'+c.slug,esc(c.title))).join('')}</div></section>
+</section>
 <section class="wrap lead"><h2>יש תקווה בשכונת התקווה</h2>
  <p>${esc(D.guy[0])}</p>
  <p class="sig">גיא זוזות, מנהל בית דני</p>${L('/about/guy','לדברי הפתיחה המלאים','more')}
@@ -444,7 +444,7 @@ V.timeline=()=>`<div class="wrap page">${crumb('ציר הזמן')}<h1>התקוו
  <div class="tl">${D.tl.map(e=>e[2]?`<a href="#/ch/${e[2]}" data-go="/ch/${e[2]}"><b>${e[0]}</b><i></i><span>${esc(e[1])}</span></a>`:`<div class="e"><b>${e[0]}</b><i></i><span>${esc(e[1])}</span></div>`).join('')}</div></div>`;
 
 let bp=1;
-V.booklet=n=>{bp=Math.min(24,Math.max(1,+n||1));return `<div class="wrap page">${crumb('חוברת התקווה')}<h1 style="text-align:center">חוברת התקווה</h1><p class="sub" style="text-align:center">לכבוד 90 שנה לשכונת התקווה · 1935–2025</p>
+V.booklet=n=>{bp=Math.min(24,Math.max(1,+n||1));return `<div class="wrap page">${crumb('חוברת התקווה')}<h1 style="text-align:center">חוברת התקווה</h1><p class="sub" style="text-align:center">לכבוד 90 שנה לשכונת התקווה · 1935–2025</p><div class="pick" style="padding:10px 0 18px"><h2>בחר פרק</h2>${CH.map(c=>L('/ch/'+c.slug,esc(c.title))).join('')}</div>
  <div class="book"><img id="bimg" src="img/bk${String(bp).padStart(2,'0')}.jpg" alt="עמוד ${bp} בחוברת"></div>
  <div class="bctl"><button id="bprev" type="button">→ הקודם</button><span id="bnum">עמוד ${bp} מתוך 24</span><button id="bnext" type="button">הבא ←</button></div></div>`};
 function flip(d){const n=bp+d;if(n<1||n>24)return;bp=n;document.getElementById('bimg').src='img/bk'+String(bp).padStart(2,'0')+'.jpg';document.getElementById('bnum').textContent='עמוד '+bp+' מתוך 24';document.getElementById('bprev').disabled=bp===1;document.getElementById('bnext').disabled=bp===24}
@@ -1351,7 +1351,7 @@ V.asakim=id=>{
 let cur='/';
 function go(path,push){cur=path||'/';const s=cur.split('/').filter(Boolean);
  let h;switch(s[0]){case 'ch':h=V.ch(s[1]);break;case 'chapters':h=V.chapters();break;case 'about':h=V.about(s[1]);break;case 'ilan':h=V.ilan();break;case 'timeline':h=V.timeline();break;case 'booklet':h=V.booklet(s[1]);break;case 'archive':h=V.archive(s[1]);break;case 'doc':h=V.doc(s[1],s[2]);break;case 'avdar':h=V.avdar(s[1]);break;case 'adina':h=V.adina();break;case 'dmuyot':h=V.dmuyot(s[1]);break;case 'asakim':h=V.asakim(s[1]);break;case 'visit':h=V.visit();break;case 'kirot':h=V.kirot();break;case 'taarukhot':h=V.taarukhot();break;default:h=V.home()}
- app.innerHTML=h;document.querySelectorAll('#tabs a').forEach(t=>t.classList.toggle('on',t.dataset.t===({dmuyot:'dmuyot',avdar:'dmuyot',adina:'dmuyot',asakim:'asakim',kirot:'kirot',taarukhot:'taarukhot',archive:'archive',doc:'archive',timeline:'timeline',booklet:'booklet',visit:'visit'}[s[0]]||'home')));{const on=document.querySelector('#tabs a.on');if(on&&innerWidth<820)on.scrollIntoView({inline:'center',block:'nearest'});}menu.classList.remove('open');document.getElementById('mb').setAttribute('aria-expanded','false');
+ app.innerHTML=h;document.querySelectorAll('#tabs a').forEach(t=>t.classList.toggle('on',t.dataset.t===({dmuyot:'dmuyot',avdar:'dmuyot',adina:'dmuyot',asakim:'asakim',kirot:'kirot',taarukhot:'taarukhot',archive:'archive',doc:'archive',timeline:'timeline',booklet:'booklet',ch:'booklet',chapters:'booklet',visit:'visit'}[s[0]]||'home')));{const on=document.querySelector('#tabs a.on');if(on&&innerWidth<820)on.scrollIntoView({inline:'center',block:'nearest'});}menu.classList.remove('open');document.getElementById('mb').setAttribute('aria-expanded','false');
  if(s[0]==='booklet')flip(0);
  window.scrollTo(0,0);
  if(push!==false){try{history.pushState(null,'','#'+cur)}catch(e){}}}
