@@ -21,7 +21,7 @@ header.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;t
 .hd{display:grid;grid-template-columns:150px 1fr 150px;align-items:center;gap:16px;padding:14px 24px 8px;max-width:var(--w);margin:0 auto}
 .lang{font-weight:600;color:var(--navy);letter-spacing:.04em;font-size:17px}
 .lang button{background:none;border:0;padding:0 2px;color:#8a9099;font-weight:600}
-.lang b{color:var(--navy)}
+.lang b{color:var(--navy)}.lang button.on{color:var(--navy);font-weight:800}
 .ttl{text-align:center;text-decoration:none;display:block}
 .ttl h1{margin:0;color:var(--navy);font-size:clamp(24px,3.4vw,38px);font-weight:800;line-height:1.15;letter-spacing:.01em}
 .ttl p{margin:2px 0 0;color:var(--txt);font-size:clamp(14px,1.5vw,18px)}
@@ -315,7 +315,7 @@ footer p{margin:0;font-size:17px;line-height:1.6}
 .tzc{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .15s}
 .tzc:hover{transform:translateY(-3px)}.tzc .im{height:210px;overflow:hidden;background:var(--soft)}.tzc .im img,.tzc .im .bzph{width:100%;height:100%;object-fit:cover;display:block}
 .tzc .tx{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px}.tzc i{font-style:normal;font-size:13px;font-weight:700;color:var(--gold)}.tzc b{font-size:20px;color:var(--navy)}.tzc span{font-size:15px;line-height:1.5}
-.tzc em{font-style:normal;margin-top:auto;padding-top:6px;color:var(--navy);font-weight:700;font-size:15px}
+.tzc .cl{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}.tzc em{font-style:normal;margin-top:auto;padding-top:6px;color:var(--navy);font-weight:700;font-size:15px}
 .vstrip{background:var(--navy);color:#fff;padding:34px 0}.vstrip .wrap{display:flex;flex-wrap:wrap;gap:16px 30px;align-items:center;justify-content:space-between}
 .vstrip h2{color:#fff;margin:0 0 6px}.vstrip p{margin:0;opacity:.9;max-width:42em}.vstrip .vbtn{background:#fff;color:var(--navy)}.vstrip .vbtn.alt{background:transparent;color:#fff;border-color:#fff}
 .syg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin:16px 0 26px}
@@ -334,7 +334,7 @@ footer p{margin:0;font-size:17px;line-height:1.6}
 <body>
 <header class="top">
  <div class="hd">
-  <div class="lang"><b>HE</b> | <button id="en" type="button">EN</button></div>
+  <div class="lang"><button id="lhe" type="button" lang="he">HE</button> | <button id="en" type="button" lang="en">EN</button></div>
   <a class="ttl" href="#/" data-go="/">
    <h1>שכונת התקווה – סיפור המורשת</h1>
    <p>פרויקט קירות מורשת<i>✦</i>האמן אמיר חודורוב</p>
@@ -393,11 +393,11 @@ const V={};
 const PARK={n:'חניית בית דני, ליד הבריכה',ll:'32.04932,34.78660'};
 const wzP=()=>`https://waze.com/ul?ll=${PARK.ll}&navigate=yes`, gmP=()=>`https://www.google.com/maps/dir/?api=1&destination=${PARK.ll}`;
 const pick=a=>a[Math.floor(Math.random()*a.length)];
-const tzCard=(to,img,k,t,txt,more)=>`<a class="tzc" href="#${to}" data-go="${to}"><span class="im">${img}</span><span class="tx"><i>${k}</i><b>${esc(t)}</b><span>${esc(txt)}</span><em>${more} ←</em></span></a>`;
+const tzCard=(to,img,k,k2,t,txt,more)=>`<a class="tzc" href="#${to}" data-go="${to}"><span class="im">${img}</span><span class="tx"><i><span>${k}</span> · <span>${esc(k2)}</span></i><b>${esc(t)}</b><span class="cl">${esc(txt)}</span><em>${more}</em></span></a>`;
 const teasers=()=>{const d=pick(DMORD),bid=pick(BZORD),B=BZ[bid],k=pick(KDOCS.filter(x=>!x.low));
- return tzCard(dmHref(d[0]),`<img src="${d[3]}" alt="${esc(d[1])}" loading="lazy">`,'דמות · '+esc(d[2]),d[1],d[5],'לסיפור המלא')
- +tzCard('/asakim/'+bid,bzPic(B),'עסק · '+esc(B.role),B.name,B.sub,'לדף העסק')
- +tzCard('/doc/'+k.id,`<img src="img/k/${k.id}_t.jpg" alt="${esc(k.title)}" loading="lazy">`,'מסמך · '+esc(k.date),k.title,k.sum.length>150?k.sum.slice(0,148).replace(/\s\S*$/,'')+'…':k.sum,'למסמך')};
+ return tzCard(dmHref(d[0]),`<img src="${d[3]}" alt="${esc(d[1])}" loading="lazy">`,'דמות',d[2],d[1],d[5],'לסיפור המלא ←')
+ +tzCard('/asakim/'+bid,bzPic(B),'עסק',B.role,B.name,B.sub,'לדף העסק ←')
+ +tzCard('/doc/'+k.id,`<img src="img/k/${k.id}_t.jpg" alt="${esc(k.title)}" loading="lazy">`,'מסמך',k.date,k.title,k.sum,'למסמך ←')};
 V.home=()=>`
 <section class="hero"><img src="img/hero_wall.jpg" alt="קיר המורשת באולם הגלגיליות בבית דני: מעפרה חזה ועד האחים ראובני" data-zoom>
 </section>
@@ -1407,19 +1407,42 @@ V.asakim=id=>{
   <p class="cap" style="text-align:start;margin-top:20px">אפשר להוסיף עוד עסקים: מעדני אמיגה, מאפיית ההגנה, שיפודי התקווה ואחרים.</p></div>`};
 
 let cur='/';
-function go(path,push){cur=path||'/';const s=cur.split('/').filter(Boolean);
+/* ===== שפה / Language ===== */
+let LANG='he',EN=null,ENP=null;const TRW=new WeakMap(),MISS=new Set();
+const nk=t=>t.replace(/\s+/g,' ').trim();
+const ATTRS=['alt','title','aria-label','placeholder'];
+function loadEN(){return ENP||(ENP=fetch('lang/en.json?v='+(window.ENV||'1')).then(r=>r.json()).then(j=>EN=j).catch(()=>EN={}))}
+function trNode(n){const v=n.nodeValue;if(!v||!/[֐-׿]/.test(v))return;const k=nk(v),e=EN&&EN[k];if(e!=null){if(!TRW.has(n))TRW.set(n,v);n.nodeValue=v.match(/^\s*/)[0]+e+v.match(/\s*$/)[0]}else MISS.add(k)}
+function trEl(el){if(!el.getAttribute)return;ATTRS.forEach(a=>{const v=el.getAttribute(a);if(v&&/[֐-׿]/.test(v)){const e=EN&&EN[nk(v)];if(e!=null){if(!el.dataset['he'+a.replace('-','')])el.dataset['he'+a.replace('-','')]=v;el.setAttribute(a,e)}else MISS.add(nk(v))}})}
+function trTree(root){if(LANG!=='en'||!EN)return;if(root.nodeType===3){trNode(root);return}
+ const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT,{acceptNode:x=>x.nodeType===1&&(x.tagName==='SCRIPT'||x.tagName==='STYLE')?2:1});
+ if(root.nodeType===1)trEl(root);let x;while(x=w.nextNode())x.nodeType===3?trNode(x):trEl(x)}
+function unTr(){const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT);let x;while(x=w.nextNode()){if(x.nodeType===3){if(TRW.has(x)){x.nodeValue=TRW.get(x);TRW.delete(x)}}else ATTRS.forEach(a=>{const d='he'+a.replace('-','');if(x.dataset&&x.dataset[d]){x.setAttribute(a,x.dataset[d]);delete x.dataset[d]}})}}
+const mo=new MutationObserver(ms=>{if(LANG!=='en')return;ms.forEach(m=>{if(m.type==='characterData')trNode(m.target);else m.addedNodes.forEach(trTree)})});
+function setLang(l){const ch=l!==LANG;LANG=l;const h=document.documentElement;h.lang=l;h.dir=l==='en'?'ltr':'rtl';
+ document.getElementById('lhe').classList.toggle('on',l==='he');document.getElementById('en').classList.toggle('on',l==='en');
+ if(ch&&l==='he')unTr();
+ if(l==='en'){trTree(document.querySelector('header.top'));trTree(document.querySelector('footer'));mo.observe(document.body,{childList:true,subtree:true,characterData:true})}else mo.disconnect();
+ document.title=l==='en'?'Hatikva Neighborhood – A Heritage Story':'שכונת התקווה – סיפור המורשת'}
+function go(path,push){const ps=(path||'/').split('/').filter(Boolean);
+ if(ps[0]==='en'){if(!EN){loadEN().then(()=>go(path,push));return}ps.shift();if(LANG!=='en')setLang('en')}else if(LANG!=='he')setLang('he');
+ render('/'+ps.join('/'),push)}
+const fullPath=()=>(LANG==='en'?'/en':'')+(cur==='/'?'':cur)||'/';
+function render(path,push){cur=path||'/';const s=cur.split('/').filter(Boolean);
  let h;switch(s[0]){case 'ch':h=V.ch(s[1]);break;case 'chapters':h=V.chapters();break;case 'about':h=V.about(s[1]);break;case 'ilan':h=V.ilan();break;case 'timeline':h=V.timeline();break;case 'booklet':h=V.booklet(s[1]);break;case 'archive':h=V.archive(s[1]);break;case 'doc':h=V.doc(s[1],s[2]);break;case 'avdar':h=V.avdar(s[1]);break;case 'adina':h=V.adina();break;case 'dmuyot':h=V.dmuyot(s[1]);break;case 'asakim':h=V.asakim(s[1]);break;case 'visit':h=V.visit();break;case 'kirot':h=V.kirot();break;case 'taarukhot':h=V.taarukhot();break;case 'batei':h=V.batei(s[1]);break;case 'projects':h=V.projects();break;default:h=V.home()}
  app.innerHTML=h;document.querySelectorAll('#tabs a').forEach(t=>t.classList.toggle('on',t.dataset.t===({dmuyot:'dmuyot',avdar:'dmuyot',adina:'dmuyot',asakim:'asakim',kirot:'kirot',taarukhot:'taarukhot',archive:'archive',doc:'archive',timeline:'timeline',booklet:'booklet',ch:'booklet',chapters:'booklet',visit:'visit',batei:'batei',projects:'projects',about:(s[1]==='artist'||s[1]==='wholeness')?'artist':''}[s[0]]||(s[0]==='about'?'':'home'))));{const on=document.querySelector('#tabs a.on');if(on&&innerWidth<820)on.scrollIntoView({inline:'center',block:'nearest'});}menu.classList.remove('open');document.getElementById('mb').setAttribute('aria-expanded','false');
  if(s[0]==='booklet')flip(0);
  window.scrollTo(0,0);
- if(push!==false){try{history.pushState(null,'','#'+cur)}catch(e){}}}
+ if(LANG==='en'){trTree(app);app.querySelectorAll('a[href^="#/"]').forEach(a=>a.setAttribute('href','#/en'+a.getAttribute('href').slice(1)))}
+ if(push!==false){try{history.pushState(null,'','#'+fullPath())}catch(e){}}}
 document.addEventListener('click',e=>{
- const a=e.target.closest('[data-go]');if(a){e.preventDefault();go(a.dataset.go);return}
+ const a=e.target.closest('[data-go]');if(a){e.preventDefault();go((LANG==='en'?'/en':'')+a.dataset.go);return}
  const z=e.target.closest('[data-zoom]');if(z){const lb=document.getElementById('lb');lb.firstElementChild.src=z.dataset.full||z.src;lb.classList.toggle('full',z.dataset.zoom==='full');lb.classList.add('on');lb.scrollTop=0;return}
  if(e.target.closest('#lb')){document.getElementById('lb').classList.remove('on');return}
  if(e.target.closest('#bprev'))flip(-1);else if(e.target.closest('#bnext'))flip(1);
  else if(e.target.closest('#mb')){const o=menu.classList.toggle('open');document.getElementById('mb').setAttribute('aria-expanded',o)}
- else if(e.target.closest('#en')){const t=document.getElementById('toast');t.textContent='הגרסה האנגלית בהכנה';t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2200)}
+ else if(e.target.closest('#en')){if(LANG!=='en')go('/en'+(cur==='/'?'':cur))}
+ else if(e.target.closest('#lhe')){if(LANG!=='he')go(cur)}
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lb').classList.remove('on');
  if(cur.startsWith('/booklet')){if(e.key==='ArrowLeft'||e.key==='PageDown')flip(1);if(e.key==='ArrowRight'||e.key==='PageUp')flip(-1)}});
