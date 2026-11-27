@@ -320,7 +320,7 @@ footer p{margin:0;font-size:17px;line-height:1.6}
  </div>
  <div class="burger"><button id="mb" type="button" aria-label="פתיחת תפריט" aria-expanded="false"><span></span></button></div>
  <nav class="menu" id="menu" aria-label="תפריט ראשי"></nav>
- <nav class="tabs" id="tabs" aria-label="אזורי האתר"><a href="#/" data-go="/" data-t="home">סיפור השכונה</a><a href="#/kirot" data-go="/kirot" data-t="kirot">קירות המורשת</a><a href="#/booklet" data-go="/booklet" data-t="booklet">חוברת התקווה · 90 שנה</a><a href="#/visit" data-go="/visit" data-t="visit">מדריכים ומבקרים</a></nav>
+ <nav class="tabs" id="tabs" aria-label="אזורי האתר"><a href="#/" data-go="/" data-t="home">סיפור השכונה</a><a href="#/kirot" data-go="/kirot" data-t="kirot">קירות המורשת</a><a href="#/taarukhot" data-go="/taarukhot" data-t="taarukhot">תערוכות</a><a href="#/booklet" data-go="/booklet" data-t="booklet">חוברת התקווה · 90 שנה</a><a href="#/visit" data-go="/visit" data-t="visit">מדריכים ומבקרים</a></nav>
 </header>
 <main id="app"></main>
 <footer>
@@ -361,7 +361,7 @@ const PH='<div class="ph">כאן ישובצו צילומי הקירות והיצ
 menu.innerHTML=`<div class="mcols">
  <div><h4>אודות</h4>${L('/about/founding','סיפור ההקמה')}${L('/about/guy','דברי פתיחה – גיא זוזות')}${L('/about/artist','האמן – אמיר חודורוב')}${L('/ilan','לזכרו של אילן משה יעקב ז״ל')}</div>
  <div class="two"><h4>סיפור השכונה</h4>${CH.map(c=>L('/ch/'+c.slug,esc(c.title))).join('')}</div>
- <div><h4>עוד באתר</h4>${L('/avdar','הרב שלום אבדר')}${L('/dmuyot','דמויות מפתח')}${L('/asakim','עסקים')}${L('/archive','כרזות ומסמכים')}${L('/timeline','ציר הזמן')}${L('/booklet','חוברת התקווה')}${L('/kirot','קירות המורשת')}${L('/visit','מדריכים ומבקרים')}<a href="${MAP}" target="_blank" rel="noopener">מפת הניווט בשכונה ↗</a><a href="${WALLS}" target="_blank" rel="noopener">קירות המורשת בזום עמוק ↗</a>${L('/chapters','כל הפרקים')}</div>
+ <div><h4>עוד באתר</h4>${L('/avdar','הרב שלום אבדר')}${L('/dmuyot','דמויות מפתח')}${L('/asakim','עסקים')}${L('/archive','כרזות ומסמכים')}${L('/timeline','ציר הזמן')}${L('/booklet','חוברת התקווה')}${L('/kirot','קירות המורשת')}${L('/taarukhot','תערוכות')}${L('/visit','מדריכים ומבקרים')}<a href="${MAP}" target="_blank" rel="noopener">מפת הניווט בשכונה ↗</a><a href="${WALLS}" target="_blank" rel="noopener">קירות המורשת בזום עמוק ↗</a>${L('/chapters','כל הפרקים')}</div>
 </div>`;
 
 const V={};
@@ -378,7 +378,7 @@ V.home=()=>`
  ${L('/booklet','<h3>חוברת התקווה</h3><p>החוברת המלאה לדפדוף – 24 עמודים על סיפורה של השכונה.</p><span>לדפדוף ←</span>','tile')}
  <a class="tile" href="${MAP}" target="_blank" rel="noopener"><h3>מפת הניווט</h3><p>מפה דיגיטלית עם ניווט לנקודות העניין ולקירות המורשת ברחבי השכונה.</p><span>לפתיחת המפה ↗</span></a>
  ${L('/dmuyot','<h3>דמויות מפתח</h3><p>רב, מנהיגה, זמרת, ספורטאי, מחנכים ויזם מבחוץ: האנשים שעיצבו את השכונה.</p><span>לדמויות ←</span>','tile')}
- ${L('/asakim','<h3>עסקים</h3><p>האחים בועז, קפה נח, תבליני נעמה, מסעדת חביב והסאלוף: העסקים שנתנו לשכונה טעם וקול.</p><span>לעסקים ←</span>','tile')}
+ ${L('/asakim','<h3>עסקים</h3><p>האחים בועז, קפה מזרחי, קפה נח, תבליני נעמה, מסעדת חביב והסאלוף: העסקים שנתנו לשכונה טעם וקול.</p><span>לעסקים ←</span>','tile')}
  <a class="tile" href="${WALLS}" target="_blank" rel="noopener"><h3>קירות המורשת בזום עמוק</h3><p>הקירות בבית דני ובמועדון בני יהודה, ברזולוציה מלאה – עד הפרט הקטן ביותר.</p><span>לצפייה ↗</span></a>
 </section>
 <section class="wrap" style="padding:10px 24px 40px"><h2 class="ksec" style="text-align:center;font-size:clamp(26px,3vw,36px)">כרזות ומסמכים מהשכונה</h2><p style="text-align:center;max-width:44em;margin:0 auto 6px">עצומות, כרזות רחוב ומכתבים לשלטונות, מ־1935 ועד שנות ה־80. השכונה מספרת את עצמה במילים שלה.</p>
@@ -1219,6 +1219,26 @@ V.kirot=()=>`<div class="wrap page">${crumb('קירות המורשת')}<h1>קי�
  ${KW.map(g=>`<h2 class="ksec" style="margin-top:26px">${esc(g[0])}</h2>${g[1]?`<p class="cap" style="text-align:start">${esc(g[1])}</p>`:''}<div class="kgal">${g[2].map(w=>`<figure><img src="${kwT(w[0])}" data-full="${kwSrc(w[0])}" alt="${esc(w[1])}" loading="lazy" data-zoom="full"><figcaption><b>${esc(w[1])}</b>${esc(w[2])}</figcaption></figure>`).join('')}</div>`).join('')}
  <p class="cap" style="text-align:start">צילום ועיצוב: אמיר חודורוב. החומרים ההיסטוריים באדיבות המשפחות והאוספים.</p></div>`;
 
+/* ===== תערוכות ===== */
+const EXH=[
+ {id:'dohal',t:'תערוכת מרכז דוהל',y:'המשכן החדש',sub:'אולם דוהל ומרכז דוהל: ארבעים שנות תרבות, תיאטרון ומוזיקה בשכונה',
+  p:['התערוכה מספרת את סיפור אולם דוהל, מההקמה בשנות ה־80, דרך ההצגות והמנויים, "המלך ואני", קדם האירוויזיון ומלחמת המפרץ, ועד המשכן החדש שנחנך ב־2023 בברכת ראש העיר רון חולדאי.'],
+  w:[['d_13','יצירת הפתיחה','עם ברכת ראש העיר רון חולדאי'],['d_9','הצהרת האמן',''],['d_16','קולאז׳ ההקמה',''],['d_1','איחוד הכנסת והמשפחה',''],['d_4','"המלך ואני"','1987, 40 הצגות'],['d_7','הצגות המנויים',''],['d_14','צילומי הצגות',''],['d_8','הצגת צילומים',''],['d_15','קדם האירוויזיון','1993, 1995'],['d_12','מלחמת המפרץ','1991'],['d_5','המשכן החדש','2023']]},
+ {id:'b50',t:'50 שנה להנחת אבן היסוד של בית דני',y:'יוני 2023',sub:'14.6.1973 הנחת אבן היסוד · 24.5.1979 בית דני נחנך',
+  p:['התערוכה הוצגה באירוע ה־50 להנחת אבן היסוד, ב־15 ביוני 2023. היא בנויה מעשר עבודות, שכל אחת מהן מספרת פרק בחיי הבית: ההקמה, האישים והאירועים, הנוער, הספורט, המחול, מלחמת המפרץ והדורות שגדלו בו. לצידן נבנו שני קירות חיצוניים לבית דני.'],
+  w:[['e50_1','אבן הפינה וההקמה',''],['e50_3','אישים ואירועים',''],['e50_2','אירועים והופעות',''],['e50_4','אם השכונה',''],['e50_5','דורות על דורות',''],['e50_noar','נוער מנ"ש',''],['e50_9','מנ"ש צופים',''],['e50_7','מחול וספורט',''],['e50_10','שחקני נשמה',''],['e50_8','מלחמת המפרץ',''],['e50_6','הצהרת האמן',''],['e50_extevent','הקירות החיצוניים','הדמיה']]},
+ {id:'b45',t:'45 שנה לבית דני',y:'2024',sub:'קיר התקווה ו"כבד את אביך ואת אמך"',
+  p:['לרגל 45 שנה לפתיחת בית דני נבנו עבודת פתיחה ושני קירות גדולים: "קיר התקווה", שמספר את סיפור השכונה, ו"כבד את אביך ואת אמך", קיר הפנים של ותיקי השכונה.'],
+  w:[['e45_open','עבודת הפתיחה',''],['W:hope45','קיר התקווה',''],['W:honor_parents','"כבד את אביך ואת אמך"','']]}
+];
+const exS=k=>k.startsWith('W:')?'img/w/'+k.slice(2)+'.jpg':'img/ex/'+k+'.jpg';
+const exT=k=>k.startsWith('W:')?'img/w/'+k.slice(2)+'_t.jpg':'img/ex/'+k+'_t.jpg';
+V.taarukhot=()=>`<div class="wrap page">${crumb('תערוכות')}<h1>תערוכות</h1>
+ <p class="sub">תערוכות שיצר אמיר חודורוב לבית דני ולמרכז דוהל</p>
+ ${EXH.map(e=>`<section id="ex-${e.id}" style="margin-top:28px"><h2 class="ksec">${esc(e.t)} <span class="cap" style="font-size:16px">· ${esc(e.y)}</span></h2><p class="cap" style="text-align:start">${esc(e.sub)}</p>${e.p.map(t=>`<p>${esc(t)}</p>`).join('')}
+ <div class="kgal">${e.w.map(w=>`<figure><img src="${exT(w[0])}" data-full="${exS(w[0])}" alt="${esc(w[1])}" loading="lazy" data-zoom="full"><figcaption><b>${esc(w[1])}</b>${esc(w[2])}</figcaption></figure>`).join('')}</div></section>`).join('')}
+ <p class="cap" style="text-align:start">צילום ועיצוב: אמיר חודורוב. התצלומים ההיסטוריים באדיבות המשפחות, הארכיון העירוני של תל אביב–יפו ולע"מ.</p></div>`;
+
 /* ===== מדריכים ומבקרים ===== */
 const NAVQ='מרכז קהילתי בית דני, סמטת כביר 4, תל אביב-יפו';
 V.visit=()=>`<div class="wrap page">${crumb('מדריכים ומבקרים')}<h1>מדריכים ומבקרים</h1>
@@ -1270,6 +1290,15 @@ naama:{name:'תבליני נעמה',role:'תבלינים',years:'רחוב המב
  think:[['ריחות של בית','איך ריח של תבלין יכול להחזיר אדם לבית ילדותו, או לארץ שהוריו עזבו?'],['לצמוח ולהישאר','העסק גדל לרשת ולמפעל ובכל זאת שמר על החנות בשוק. למה זה חשוב?'],['ולכם','איזה תבלין או מאכל מזכיר לכם את הבית?']],
  src:[['https://timeout.co.il/שוק-התקווה-דוכנים-מסעדות/','טיים אאוט: זיק של תקווה','שנת הייסוד 1963 ונעמה עובדיה'],['https://www.maariv.co.il/news/israel/article-1386479','מעריב: השוק הנוסטלגי שחייבים להגיע אליו רעבים','מחנות של 12 מ״ר לארבעה סניפים ומפעל'],['https://www.ynet.co.il/articles/mobile/0,7340,L-4397795,00.html','ynet: 6 מוסדות אוכל בשוק התקווה',''],['DRIVE','הזמנה לערב סיפורי שכונה עם דויד נעמה, 24.6.2024 (מהדרייב)','']],
  links:[['/ch/shuk','הפרק בחוברת: שוק התקווה']]},
+mizrahi:{name:'קפה מזרחי',role:'בית קלייה',years:'שכונת התקווה · מאז 1947',c:'#5b3a1e',img:'img/w/cafe_mizrahi_t.jpg',
+ sub:'בית קלייה לקפה ותבלינים, שלושה דורות של משפחה אחת',
+ quote:'Since 1947',
+ intro:['ב־1947 פתחו ציון מזרחי ואחיו יצחק את "קפה מזרחי", בית לקליית קפה וייצור תבלינים בשכונת התקווה. ציון עלה שנה קודם לכן מדמשק עם משפחתו והשתקע בשכונה.','היום מוביל את העסק עזרא מזרחי, בנו של ציון, שעזר לאביו בחנות עוד מילדותו. הוא המשיך להתמקצע בקלייה ובפיתוח תערובות קפה, ושומר על מכונות הקלייה המקוריות ועל שיטות הקלייה המסורתיות.'],
+ path:[['1946: מדמשק לתקווה','ציון מזרחי עולה מדמשק עם משפחתו ומשתקע בשכונת התקווה.'],['1947: בית הקלייה','ציון ואחיו יצחק פותחים את "קפה מזרחי", לקליית קפה ולייצור תבלינים.'],['ילד בחנות','עזרא, בנו של ציון, עוזר לאביו בחנות מגיל צעיר ולומד את המלאכה.'],['הדור הבא','עזרא לוקח את העסק לידיו, מפתח תערובות ושומר על המכונות המקוריות ועל הקלייה המסורתית.']],
+ feat:{img:'img/w/cafe_mizrahi.jpg',k:'קיר המורשת',h:'הקיר החיצוני של קפה מזרחי',p:['הקיר החיצוני של בית הקלייה נבנה בשיטת הצילום של אמיר חודורוב: פולי קפה קלויים, דיוקנאות של ציון ועזרא מזרחי, הסיפור בכתב ושלט "Since 1947".','הטקסטים על הקיר נכתבו יחד עם המשפחה, והם המקור העיקרי לסיפור בעמוד הזה.']},
+ think:[['ריח של בוקר','איזה תפקיד יש לריח של קפה קלוי ברחוב? איך הוא הופך לחלק מזהות של שכונה?'],['לשמור מכונה ישנה','למה כדאי לשמור על מכונות ושיטות של פעם, כשיש חדשות ומהירות יותר?'],['ולכם','איזה עסק בשכונה שלכם עובר מאב לבן?']],
+ src:[['DRIVE','קיר המורשת של קפה מזרחי, הטקסטים שנכתבו עם המשפחה','']],
+ links:[['/ch/shuk','הפרק בחוברת: שוק התקווה'],['/asakim/naama','תבליני נעמה']]},
 habib:{name:'מסעדת חביב',role:'אוכל עיראקי',years:'רחוב המבשר 21 · מאז 1960',c:'#b91c1c',img:'img/bz/habib.jpg',
  sub:'"מלך הקובות": מורשת קולינרית עיראקית בשוק התקווה',
  quote:'Since 1920: מורשת קולינרית עיראקית',
@@ -1288,7 +1317,7 @@ salouf:{name:'הסאלוף',role:'מאפייה תימנית',years:'רחוב ה�
  src:[['https://www.calcalist.co.il/style/article/byrixsuk0','כלכליסט, "המוסדות": יעקב צוברי והסאלוף','הפתיחה ב־2002 והסיפור האישי'],['https://timeout.co.il/שוק-התקווה-דוכנים-מסעדות/','טיים אאוט: זיק של תקווה','הקשר לשחר צוברי'],['https://timeout.co.il/סאלוף-ובניו-סגירה/','טיים אאוט: סאלוף ובניו נסגרת','השלוחה בלוינסקי']],
  links:[['/ch/shuk','הפרק בחוברת: שוק התקווה']]}
 };
-const BZORD=['boaz','noah','naama','habib','salouf'];
+const BZORD=['boaz','mizrahi','noah','naama','habib','salouf'];
 const bzPic=(P,big)=>P.img?`<img src="${P.img}" alt="${esc(P.name)}"${big?' data-zoom':' loading="lazy"'}>`:`<div class="bzph" style="--c:${P.c}"><em>${esc(P.years.match(/\d{4}/)?.[0]||'')}</em><b>${esc(P.name)}</b><i>${esc(P.role)}</i></div>`;
 V.asakim=id=>{
  const P=id&&BZ[id];
@@ -1317,8 +1346,8 @@ V.asakim=id=>{
 
 let cur='/';
 function go(path,push){cur=path||'/';const s=cur.split('/').filter(Boolean);
- let h;switch(s[0]){case 'ch':h=V.ch(s[1]);break;case 'chapters':h=V.chapters();break;case 'about':h=V.about(s[1]);break;case 'ilan':h=V.ilan();break;case 'timeline':h=V.timeline();break;case 'booklet':h=V.booklet(s[1]);break;case 'archive':h=V.archive(s[1]);break;case 'doc':h=V.doc(s[1],s[2]);break;case 'avdar':h=V.avdar(s[1]);break;case 'adina':h=V.adina();break;case 'dmuyot':h=V.dmuyot(s[1]);break;case 'asakim':h=V.asakim(s[1]);break;case 'visit':h=V.visit();break;case 'kirot':h=V.kirot();break;default:h=V.home()}
- app.innerHTML=h;document.querySelectorAll('#tabs a').forEach(t=>t.classList.toggle('on',t.dataset.t===(s[0]==='booklet'?'booklet':s[0]==='visit'?'visit':s[0]==='kirot'?'kirot':'home')));menu.classList.remove('open');document.getElementById('mb').setAttribute('aria-expanded','false');
+ let h;switch(s[0]){case 'ch':h=V.ch(s[1]);break;case 'chapters':h=V.chapters();break;case 'about':h=V.about(s[1]);break;case 'ilan':h=V.ilan();break;case 'timeline':h=V.timeline();break;case 'booklet':h=V.booklet(s[1]);break;case 'archive':h=V.archive(s[1]);break;case 'doc':h=V.doc(s[1],s[2]);break;case 'avdar':h=V.avdar(s[1]);break;case 'adina':h=V.adina();break;case 'dmuyot':h=V.dmuyot(s[1]);break;case 'asakim':h=V.asakim(s[1]);break;case 'visit':h=V.visit();break;case 'kirot':h=V.kirot();break;case 'taarukhot':h=V.taarukhot();break;default:h=V.home()}
+ app.innerHTML=h;document.querySelectorAll('#tabs a').forEach(t=>t.classList.toggle('on',t.dataset.t===(s[0]==='booklet'?'booklet':s[0]==='visit'?'visit':s[0]==='kirot'?'kirot':s[0]==='taarukhot'?'taarukhot':'home')));menu.classList.remove('open');document.getElementById('mb').setAttribute('aria-expanded','false');
  if(s[0]==='booklet')flip(0);
  window.scrollTo(0,0);
  if(push!==false){try{history.pushState(null,'','#'+cur)}catch(e){}}}
