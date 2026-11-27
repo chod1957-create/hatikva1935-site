@@ -212,6 +212,10 @@ footer p{margin:0;font-size:17px;line-height:1.6}
 .dmi{font-size:19px;line-height:1.8;max-width:52em}
 .dmg{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:22px;margin-top:22px}
 .dmg{gap:18px}@media(min-width:1000px){.dmg{grid-template-columns:repeat(3,1fr)}}
+.kgal{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin:12px 0 26px}
+.kgal figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.kgal img{display:block;width:100%;height:220px;object-fit:cover;cursor:zoom-in;background:#f3efe4}
+.kgal figcaption{padding:8px 12px 10px;font-size:15px;line-height:1.45}.kgal figcaption b{color:var(--navy);display:block}
 .tabs{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;padding:0 16px 10px;max-width:var(--w);margin:0 auto}
 .tabs a{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--navy);font-weight:700;text-decoration:none;font-size:16px}
 .tabs a.on{background:var(--navy);border-color:var(--navy);color:#fff}.tabs a:hover{border-color:var(--navy)}
@@ -316,7 +320,7 @@ footer p{margin:0;font-size:17px;line-height:1.6}
  </div>
  <div class="burger"><button id="mb" type="button" aria-label="פתיחת תפריט" aria-expanded="false"><span></span></button></div>
  <nav class="menu" id="menu" aria-label="תפריט ראשי"></nav>
- <nav class="tabs" id="tabs" aria-label="אזורי האתר"><a href="#/" data-go="/" data-t="home">סיפור השכונה</a><a href="#/booklet" data-go="/booklet" data-t="booklet">חוברת התקווה · 90 שנה</a><a href="#/visit" data-go="/visit" data-t="visit">מדריכים ומבקרים</a></nav>
+ <nav class="tabs" id="tabs" aria-label="אזורי האתר"><a href="#/" data-go="/" data-t="home">סיפור השכונה</a><a href="#/kirot" data-go="/kirot" data-t="kirot">קירות המורשת</a><a href="#/booklet" data-go="/booklet" data-t="booklet">חוברת התקווה · 90 שנה</a><a href="#/visit" data-go="/visit" data-t="visit">מדריכים ומבקרים</a></nav>
 </header>
 <main id="app"></main>
 <footer>
@@ -357,7 +361,7 @@ const PH='<div class="ph">כאן ישובצו צילומי הקירות והיצ
 menu.innerHTML=`<div class="mcols">
  <div><h4>אודות</h4>${L('/about/founding','סיפור ההקמה')}${L('/about/guy','דברי פתיחה – גיא זוזות')}${L('/about/artist','האמן – אמיר חודורוב')}${L('/ilan','לזכרו של אילן משה יעקב ז״ל')}</div>
  <div class="two"><h4>סיפור השכונה</h4>${CH.map(c=>L('/ch/'+c.slug,esc(c.title))).join('')}</div>
- <div><h4>עוד באתר</h4>${L('/avdar','הרב שלום אבדר')}${L('/dmuyot','דמויות מפתח')}${L('/asakim','עסקים')}${L('/archive','כרזות ומסמכים')}${L('/timeline','ציר הזמן')}${L('/booklet','חוברת התקווה')}${L('/visit','מדריכים ומבקרים')}<a href="${MAP}" target="_blank" rel="noopener">מפת הניווט בשכונה ↗</a><a href="${WALLS}" target="_blank" rel="noopener">קירות המורשת בזום עמוק ↗</a>${L('/chapters','כל הפרקים')}</div>
+ <div><h4>עוד באתר</h4>${L('/avdar','הרב שלום אבדר')}${L('/dmuyot','דמויות מפתח')}${L('/asakim','עסקים')}${L('/archive','כרזות ומסמכים')}${L('/timeline','ציר הזמן')}${L('/booklet','חוברת התקווה')}${L('/kirot','קירות המורשת')}${L('/visit','מדריכים ומבקרים')}<a href="${MAP}" target="_blank" rel="noopener">מפת הניווט בשכונה ↗</a><a href="${WALLS}" target="_blank" rel="noopener">קירות המורשת בזום עמוק ↗</a>${L('/chapters','כל הפרקים')}</div>
 </div>`;
 
 const V={};
@@ -1197,6 +1201,24 @@ function byBox(){const R=[['המטרה','לגדל את ילדי השכונה: ג
   <div><b>ולכם</b><p>מה היה המועדון, החוג או התנועה שחינכו אתכם? האם זכרתם את הניצחונות, או את האנשים?</p></div></div>
  <p style="margin:16px 0 0">${L('/dmuyot/solomi','גד ודוד סולמי, המחנכים ←','more')}<br>${L('/dmuyot/moshevitz','מרק מושביץ ו"עלית" ←','more')}</p></div>`}
 
+/* ===== קירות המורשת ===== */
+const KW=[
+ ['בית דני: אולם הגלגיליות ("קירות מספרים")','נקודת הפתיחה של הפרויקט, דצמבר 2022',[['hero_wall','הקיר השמאלי','מעפרה חזה ועד האחים ראובני',1],['skate_right','הקיר הימני','']]],
+ ['בית דני: כניסה ולובי','',[['entrance','קיר הכניסה לבית דני',''],['entrance_right','קיר הכניסה בצד ימין','ליד מועדון הקשישות'],['lobby','לובי הכניסה',''],['lobby_photo','קיר הצילום בלובי','']]],
+ ['בית דני: העלייה לספרייה','קירות הספירלה, מהקמת השכונה ועד היום',[['spiral_first','הקיר הראשון','הקמת השכונה'],['spiral_rect','הקיר הראשון: המלבן',''],['spiral_full','קירות העלייה','קובץ מלא'],['spiral_floor2','הקיר הניצב, קומה 2',''],['diagonal_avdar','הקיר האלכסוני לפני הספרייה','הרב אבדר'],['faces','"ואהבת לרעך כמוך"','קיר הפרצופים'],['honor_parents','"כבד את אביך ואת אמך"','']]],
+ ['בית דני: תערוכות וחללים','',[['hope45','קיר התקווה','תערוכת 45 שנה לבית דני'],['basketball','אולם הכדורסל','הקיר האמצעי'],['pool','הכניסה לבריכת השחייה','']]],
+ ['בני יהודה','',[['by_stadium','קיר הכניסה לאצטדיון',''],['by_trophies','הקיר הפנימי: התארים','אליפות, גביעים, "Since 1936"'],['by_inner','הקיר הפנימי האחרון',''],['dohal_by','בני יהודה בכניסה לאולם דוהל','']]],
+ ['בתי הכנסת והרב אבדר','',[['syn_opening','עבודת הפתיחה','תערוכת בתי הכנסת'],['syn_avdar','בית הכנסת "אור שלום"','של הרב שלום אבדר'],['avdar_house','הקיר החיצוני בבית הרב אבדר','רחוב האצ"ל 13'],['avdar_writings','כתבי הרב אבדר',''],['syn_shamai_wall','בית הכנסת שמאי','הקיר החיצוני בשוק'],['syn_shamai','בית הכנסת שמאי','מבפנים'],['syn_tiferet','תפארת ישראל',''],['syn_magen','מגן דוד',''],['syn_turkey','בית הכנסת של עולי טורקיה',''],['syn_ashkenazi','בית הכנסת האשכנזי',''],['syn_levi','בית לוי','רחוב התקווה'],['syn_gila','בית הכנסת גילה','']]],
+ ['השוק, העסקים והמוזיקה','',[['habib_right','קיר מורשת משפחת חביב','צד ימין'],['habib_left','קיר מורשת משפחת חביב','המשך, צד שמאל'],['habib_guest','מסעדת חביב','קיר חדר האירוח'],['habib_sign','מסעדת חביב','שלט הכניסה מעל הרחוב'],['salouf_sign','הסאלוף','שלט הכניסה'],['cafe_mizrahi','קפה מזרחי','הקיר החיצוני'],['reuveni','חנות האחים ראובני','דרך ההגנה'],['reuveni_left','חנות האחים ראובני','המשך, קיר שמאלי'],['ofra_graffiti','עפרה חזה','גרפיטי ברחוב בועז']]]
+];
+const kwSrc=k=>k==='hero_wall'?'img/hero_wall.jpg':'img/w/'+k+'.jpg';
+const kwT=k=>k==='hero_wall'?'img/hero_wall.jpg':'img/w/'+k+'_t.jpg';
+V.kirot=()=>`<div class="wrap page">${crumb('קירות המורשת')}<h1>קירות המורשת</h1>
+ <p class="sub">כ־1,200 מ"ר של קירות ויצירות בשיטת Wholeness Photography · האמן אמיר חודורוב</p>
+ <p>מאז דצמבר 2022 נבנים בשכונה קירות מורשת: בבית דני, במועדון בני יהודה, בבתי הכנסת, בשוק וברחובות. כל קיר בנוי מאלפי צילומים ומסמכים שמחוברים לתמונה אחת. לחצו על קיר כדי להגדיל אותו.</p>
+ ${KW.map(g=>`<h2 class="ksec" style="margin-top:26px">${esc(g[0])}</h2>${g[1]?`<p class="cap" style="text-align:start">${esc(g[1])}</p>`:''}<div class="kgal">${g[2].map(w=>`<figure><img src="${kwT(w[0])}" data-full="${kwSrc(w[0])}" alt="${esc(w[1])}" loading="lazy" data-zoom="full"><figcaption><b>${esc(w[1])}</b>${esc(w[2])}</figcaption></figure>`).join('')}</div>`).join('')}
+ <p class="cap" style="text-align:start">צילום ועיצוב: אמיר חודורוב. החומרים ההיסטוריים באדיבות המשפחות והאוספים.</p></div>`;
+
 /* ===== מדריכים ומבקרים ===== */
 const NAVQ='מרכז קהילתי בית דני, סמטת כביר 4, תל אביב-יפו';
 V.visit=()=>`<div class="wrap page">${crumb('מדריכים ומבקרים')}<h1>מדריכים ומבקרים</h1>
@@ -1295,14 +1317,14 @@ V.asakim=id=>{
 
 let cur='/';
 function go(path,push){cur=path||'/';const s=cur.split('/').filter(Boolean);
- let h;switch(s[0]){case 'ch':h=V.ch(s[1]);break;case 'chapters':h=V.chapters();break;case 'about':h=V.about(s[1]);break;case 'ilan':h=V.ilan();break;case 'timeline':h=V.timeline();break;case 'booklet':h=V.booklet(s[1]);break;case 'archive':h=V.archive(s[1]);break;case 'doc':h=V.doc(s[1],s[2]);break;case 'avdar':h=V.avdar(s[1]);break;case 'adina':h=V.adina();break;case 'dmuyot':h=V.dmuyot(s[1]);break;case 'asakim':h=V.asakim(s[1]);break;case 'visit':h=V.visit();break;default:h=V.home()}
- app.innerHTML=h;document.querySelectorAll('#tabs a').forEach(t=>t.classList.toggle('on',t.dataset.t===(s[0]==='booklet'?'booklet':s[0]==='visit'?'visit':'home')));menu.classList.remove('open');document.getElementById('mb').setAttribute('aria-expanded','false');
+ let h;switch(s[0]){case 'ch':h=V.ch(s[1]);break;case 'chapters':h=V.chapters();break;case 'about':h=V.about(s[1]);break;case 'ilan':h=V.ilan();break;case 'timeline':h=V.timeline();break;case 'booklet':h=V.booklet(s[1]);break;case 'archive':h=V.archive(s[1]);break;case 'doc':h=V.doc(s[1],s[2]);break;case 'avdar':h=V.avdar(s[1]);break;case 'adina':h=V.adina();break;case 'dmuyot':h=V.dmuyot(s[1]);break;case 'asakim':h=V.asakim(s[1]);break;case 'visit':h=V.visit();break;case 'kirot':h=V.kirot();break;default:h=V.home()}
+ app.innerHTML=h;document.querySelectorAll('#tabs a').forEach(t=>t.classList.toggle('on',t.dataset.t===(s[0]==='booklet'?'booklet':s[0]==='visit'?'visit':s[0]==='kirot'?'kirot':'home')));menu.classList.remove('open');document.getElementById('mb').setAttribute('aria-expanded','false');
  if(s[0]==='booklet')flip(0);
  window.scrollTo(0,0);
  if(push!==false){try{history.pushState(null,'','#'+cur)}catch(e){}}}
 document.addEventListener('click',e=>{
  const a=e.target.closest('[data-go]');if(a){e.preventDefault();go(a.dataset.go);return}
- const z=e.target.closest('[data-zoom]');if(z){const lb=document.getElementById('lb');lb.firstElementChild.src=z.src;lb.classList.toggle('full',z.dataset.zoom==='full');lb.classList.add('on');lb.scrollTop=0;return}
+ const z=e.target.closest('[data-zoom]');if(z){const lb=document.getElementById('lb');lb.firstElementChild.src=z.dataset.full||z.src;lb.classList.toggle('full',z.dataset.zoom==='full');lb.classList.add('on');lb.scrollTop=0;return}
  if(e.target.closest('#lb')){document.getElementById('lb').classList.remove('on');return}
  if(e.target.closest('#bprev'))flip(-1);else if(e.target.closest('#bnext'))flip(1);
  else if(e.target.closest('#mb')){const o=menu.classList.toggle('open');document.getElementById('mb').setAttribute('aria-expanded',o)}
