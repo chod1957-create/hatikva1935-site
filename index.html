@@ -44,11 +44,11 @@ nav.menu.open{display:block}
 .mcols .two h4{column-span:all}
 
 /* home */
-.hero{position:relative;background:#0b1c3d}
-.hero>img{width:100%;height:min(66vh,620px);object-fit:cover}
-.pick{position:absolute;top:22px;right:max(24px,calc((100vw - var(--w))/2 + 24px));bottom:22px;width:300px;background:rgba(255,255,255,.9);border-radius:14px;padding:16px 20px;overflow:auto;backdrop-filter:blur(3px)}
-.pick h2{margin:0 0 6px;color:var(--navy);font-size:22px;font-weight:800}
-.pick a{display:block;text-decoration:none;color:#2b3340;font-size:17px;line-height:1.72;font-weight:600}
+.hero{position:relative;background:#fff;border-bottom:1px solid var(--line)}
+.hero>img{width:100%;height:auto;display:block;cursor:zoom-in}
+.pick{max-width:var(--w);margin:0 auto;padding:14px 24px 16px;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;background:#fff}
+.pick h2{margin:0 8px 0 0;color:var(--navy);font-size:19px;font-weight:800;width:100%}
+.pick a{display:inline-block;text-decoration:none;color:#2b3340;font-size:15.5px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:4px 12px}
 .pick a:hover{color:var(--gold)}
 .lead{text-align:center;padding:46px 0 14px}
 .lead h2{color:var(--navy);font-size:clamp(26px,3vw,36px);margin:0 0 10px;font-weight:800}
@@ -135,9 +135,9 @@ footer p{margin:0;font-size:17px;line-height:1.6}
  .hd{grid-template-columns:70px 1fr 70px;padding:10px 14px 6px}
  .logo img{height:22px}
  .mcols{grid-template-columns:1fr 1fr}.mcols .two{columns:1}
- .hero>img{height:240px}
- .pick{position:static;width:auto;border-radius:0;columns:2;column-gap:20px}
- .pick h2{column-span:all}
+ .hero>img{height:200px;object-fit:cover;object-position:right center}
+ .pick{padding:12px 16px}
+ .pick h2{font-size:17px}
  .tiles{grid-template-columns:1fr}
  .cols{grid-template-columns:1fr;gap:20px}
  .side{position:static}
@@ -310,7 +310,7 @@ footer p{margin:0;font-size:17px;line-height:1.6}
   <div class="lang"><b>HE</b> | <button id="en" type="button">EN</button></div>
   <a class="ttl" href="#/" data-go="/">
    <h1>שכונת התקווה – סיפור המורשת</h1>
-   <p>עבר<i>✦</i>הווה<i>✦</i>תקווה · מאז 1935</p>
+   <p>פרויקט קירות מורשת<i>✦</i>האמן אמיר חודורוב</p>
   </a>
   <a class="logo" href="#/about/artist" data-go="/about/artist" title="AC Amir Chodorov – Wholeness Photography"><img src="img/logo.png" alt="AC Amir Chodorov – Wholeness Photography"><sup>®</sup></a>
  </div>
@@ -362,7 +362,7 @@ menu.innerHTML=`<div class="mcols">
 
 const V={};
 V.home=()=>`
-<section class="hero"><img src="img/t_beitdani.jpg" alt="המרכז הקהילתי בית דני בשכונת התקווה">
+<section class="hero"><img src="img/t_walls2.jpg" alt="קיר המורשת באולם הגלגיליות בבית דני: מעפרה חזה ועד האחים ראובני" data-zoom>
  <div class="pick"><h2>בחר פרק</h2>${CH.map(c=>L('/ch/'+c.slug,esc(c.title))).join('')}</div></section>
 <section class="wrap lead"><h2>יש תקווה בשכונת התקווה</h2>
  <p>${esc(D.guy[0])}</p>
