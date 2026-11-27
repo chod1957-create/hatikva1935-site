@@ -1434,7 +1434,7 @@ function render(path,push){cur=path||'/';const s=cur.split('/').filter(Boolean);
  if(s[0]==='booklet')flip(0);
  window.scrollTo(0,0);
  if(LANG==='en'){trTree(app);app.querySelectorAll('a[href^="#/"]').forEach(a=>a.setAttribute('href','#/en'+a.getAttribute('href').slice(1)))}
- if(push!==false){try{history.pushState(null,'','#'+fullPath())}catch(e){}}}
+ {const fp=fullPath(),u=fp==='/'?location.pathname+location.search:'#'+fp;try{if(push!==false)history.pushState(null,'',u);else if(fp==='/'&&location.hash)history.replaceState(null,'',u)}catch(e){}}}
 document.addEventListener('click',e=>{
  const a=e.target.closest('[data-go]');if(a){e.preventDefault();go((LANG==='en'?'/en':'')+a.dataset.go);return}
  const z=e.target.closest('[data-zoom]');if(z){const lb=document.getElementById('lb');lb.firstElementChild.src=z.dataset.full||z.src;lb.classList.toggle('full',z.dataset.zoom==='full');lb.classList.add('on');lb.scrollTop=0;try{history.pushState({lb:1},'',location.href)}catch(e){}return}
